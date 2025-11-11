@@ -20,9 +20,9 @@
     :root {
       --bg: #0a0720;
       --text: #eaf6ff;
-      --muted: #b8a2ff;
+      --muted: #eaf6ff;
       --brand: #00bfff;
-      --brand-2: #7df9ff;
+      --brand-2: #eaf6ff;
       --accent: #a78bfa;
       --grid-line: rgba(167,139,250,.22);
       --grid-glow: rgba(125,249,255,.18);
@@ -79,7 +79,7 @@
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       overflow: hidden;
-      box-shadow: 0 10px 40px rgba(0,191,255,.35), 0 0 40px rgba(167,139,250,.15), inset 0 1px 0 rgba(255,255,255,.08);
+      box-shadow: 0 10px 40px #eaf6ff, 0 0 40px #eaf6ff, inset 0 1px 0 rgba(255,255,255,.08);
       text-align: center;
     }
 
@@ -99,7 +99,6 @@
     h1 {
       font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.15;
       margin: .2rem 0 .6rem; color: var(--brand-2);
-      text-shadow: 0 0 12px rgba(125,249,255,.5), 0 0 20px rgba(167,139,250,.3);
     }
     p.lead { font-size: clamp(1rem, 2.2vw, 1.1rem); color: var(--muted); margin: 0 0 1.2rem; }
 
@@ -127,7 +126,6 @@
 
     .link:hover { transform: scale(1.08); filter: brightness(1.2); }
 
-    /* Make buttons glow on hover instead of icons */
     .link[href*="twitch.tv"]:hover {
       background: rgba(145,70,255,0.3);
       box-shadow: 0 0 16px var(--twitch), 0 0 32px rgba(145,70,255,0.4);
@@ -164,13 +162,13 @@
     <main class="card" role="main" aria-labelledby="headline">
       <div class="glow" aria-hidden="true"></div>
 
-      <img src="https://i.postimg.cc/mr9fKWjv/1-01.png" alt="Graveyard of Boodinky logo" class="logo-img" loading="lazy" decoding="async" width="320" height="320" />
+      <img src="https://i.postimg.cc/VLRLKGcG/1-01.png" alt="Graveyard of Boodinky logo" class="logo-img" loading="lazy" decoding="async" width="320" height="320" />
 
       <h1 id="headline">We're Coming... Soon</h1>
       <p class="lead">A Discord's Story</p>
 
       <section>
-        <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25" aria-label="25 percent complete">
+        <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25" aria-label="25 percent complete" data-progress-min="10" data-progress-max="80" data-progress-duration="10000">
           <div class="bar" id="bar"></div>
         </div>
       </section>
@@ -197,71 +195,44 @@
   </div>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // Year stamp
+    (function () {
+      var yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+    }());
 
+    // Oscillating progress (reads speed & range from data-attributes, honors reduced motion)
     (function () {
       var bar = document.getElementById('bar');
       var pb = bar && bar.parentElement;
       if (!pb) return;
-      var val = parseInt(pb.getAttribute('aria-valuenow'), 10);
-      if (isFinite(val) && val >= 0 && val <= 100) {
-        requestAnimationFrame(function () { bar.style.width = val + '%'; });
+
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var startVal = Math.max(0, Math.min(100, parseInt(pb.getAttribute('aria-valuenow'), 10) || 0));
+
+      var minVal = Math.max(0, Math.min(100, parseInt(pb.dataset.progressMin, 10) || 10));
+      var maxVal = Math.max(minVal, Math.min(100, parseInt(pb.dataset.progressMax, 10) || 80));
+      var duration = Math.max(1000, parseInt(pb.dataset.progressDuration, 10) || 60000); // ms per full cycle
+
+      function setProgress(p) {
+        var val = Math.max(0, Math.min(100, p));
+        bar.style.width = val + '%';
+        pb.setAttribute('aria-valuenow', Math.round(val));
+        pb.setAttribute('aria-label', Math.round(val) + ' percent complete');
       }
+
+      if (prefersReduced) { setProgress(startVal); return; }
+
+      var start = performance.now();
+      function tick(now) {
+        var t = ((now - start) % duration) / duration;       // 0..1
+        var wave = 0.5 - 0.5 * Math.cos(t * 2 * Math.PI);    // ease in/out
+        var val = minVal + (maxVal - minVal) * wave;         // map to range
+        setProgress(val);
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
     }());
   </script>
-  
-  <script>
-// Year stamp
-document.getElementById('year').textContent = new Date().getFullYear();
-
-
-// Progressive fill that reverses once reaching a limit
-(function () {
-const bar = document.getElementById('bar');
-const pb = bar && bar.parentElement;
-if (!pb) return;
-
-
-const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-let startVal = parseInt(pb.getAttribute('aria-valuenow'), 10);
-if (!isFinite(startVal)) startVal = 0;
-
-
-const minVal = 10; // where to stop on the low end
-const maxVal = 80; // where to stop on the high end
-const duration = 10000; // ms for one full cycle (up + down)
-
-
-function setProgress(p) {
-const val = Math.max(0, Math.min(100, p));
-bar.style.width = val + '%';
-pb.setAttribute('aria-valuenow', Math.round(val));
-pb.setAttribute('aria-label', Math.round(val) + ' percent complete');
-}
-
-
-if (prefersReduced) {
-setProgress(startVal);
-return;
-}
-
-
-let start = performance.now();
-let direction = 1; // 1 = forward, -1 = backward
-let current = startVal;
-
-
-function tick(now) {
-const elapsed = now - start;
-const t = (elapsed % duration) / duration; // loop 0..1
-// create a smooth back-and-forth ramp using sine wave mapping
-const wave = 0.5 - 0.5 * Math.cos(t * 2 * Math.PI);
-current = minVal + (maxVal - minVal) * wave;
-setProgress(current);
-requestAnimationFrame(tick);
-}
-requestAnimationFrame(tick);
-}());
-</script>
 </body>
 </html>
