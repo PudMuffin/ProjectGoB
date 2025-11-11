@@ -1,1 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Graveyard of Boodinky</title>
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/YS86kfg1/favicon.png" />
+  <meta name="description" content="A clean, responsive under construction page with vaporwave blue + purple aesthetic and animated grid." />
+  <meta property="og:title" content="The Graveyard of Boodinky" />
+  <meta property="og:description" content="Tall Tales From a Small Discord" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#7df9ff" />
+  <meta name="color-scheme" content="dark light" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <!-- Header/Tab font -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0a0720;
+      --text: #eaf6ff;
+      --muted: #eaf6ff;
+      --brand: #00bfff;
+      --brand-2: #eaf6ff;
+      --accent: #a78bfa;
+      --grid-line: rgba(167,139,250,.22);
+      --grid-glow: rgba(125,249,255,.18);
+      --yt: #ff1744;
+      --twitch: #9146ff;
+      --tiktok: #00f2ea;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(90vw 90vw at 15% -20%, rgba(167,139,250,.25), transparent 60%),
+        radial-gradient(70vw 70vw at 120% 0%, rgba(0,191,255,.25), transparent 60%),
+        radial-gradient(60vw 60vw at 0% 120%, rgba(125,249,255,.2), transparent 60%),
+        var(--bg);
+      background-attachment: fixed;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100%;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .grid-bg {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      opacity: .45; mix-blend-mode: screen;
+      background-image:
+        linear-gradient(to bottom, var(--grid-glow), transparent 60%),
+        repeating-linear-gradient(to right, var(--grid-line) 0 1px, transparent 1px 80px),
+        repeating-linear-gradient(to top, var(--grid-line) 0 1px, transparent 1px 80px);
+      background-size: 100% 100%, 160px 160px, 160px 160px;
+      background-position: 0 0, 0 0, 0 0;
+      transform: perspective(900px) rotateX(60deg) translateY(25%);
+      filter: drop-shadow(0 0 8px var(--grid-glow));
+      animation: gridScroll 18s linear infinite;
+    }
+    @keyframes gridScroll { to { background-position: 0 0, 0 320px, 0 -320px; } }
+
+    .card {
+      position: relative; z-index: 1;
+      width: 100%; max-width: 760px;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.1); border-radius: 24px;
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      overflow: hidden;
+      box-shadow: 0 10px 40px #eaf6ff, 0 0 40px #eaf6ff, inset 0 1px 0 rgba(255,255,255,.08);
+      text-align: center;
+    }
+
+    .glow {
+      position: absolute; inset: -40%;
+      background: radial-gradient(closest-side, rgba(167,139,250,.2), transparent 70%);
+      filter: blur(70px); pointer-events: none;
+      animation: float 14s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100% { transform: translate(0,0); } 50% { transform: translate(3rem, -2rem); } }
+
+    /* Orbitron for headings/nav/tagline/footer */
+    h1, h2, h3, .nav-link, .lead, .tiny { font-family: 'Orbitron', sans-serif; }
+
+    /* Top nav */
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .nav-link {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text);
+      text-decoration: none;
+      position: relative;
+      padding: .5em 1em;
+      border-radius: 999px;
+      transition: color .3s ease, box-shadow .3s ease, background .3s ease;
+    }
+    .nav-link:hover {
+      color: var(--brand-2);
+      background: linear-gradient(90deg, var(--brand) 0%, var(--accent) 100%);
+      box-shadow: 0 0 10px var(--brand), 0 0 20px var(--accent), inset 0 0 8px rgba(255,255,255,0.15);
+    }
+/* Active tab (current page) */
+.nav-link[aria-current="page"] {
+  color: var(--brand-2);
+  background: linear-gradient(90deg, var(--brand) 0%, var(--accent) 100%);
+  box-shadow:
+    0 0 10px var(--brand),
+    0 0 20px var(--accent),
+    inset 0 0 8px rgba(255,255,255,0.15);
+}
+    .logo-img {
+      width: 160px; max-width: 50%; height: auto;
+      margin-bottom: 1.5rem; border-radius: 12px;
+    }
+
+    h1 {
+      font-weight: 800;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin: .2rem 0 .6rem; color: var(--brand-2);
+      text-shadow: 0 0 12px rgba(125,249,255,.35), 0 0 24px rgba(167,139,250,.2);
+    }
+    p.lead { font-size: clamp(1rem, 2.2vw, 1.1rem); color: var(--muted); margin: 0 0 1.2rem; }
+
+    .progress {
+      background: rgba(255,255,255,.08);
+      border-radius: 999px; height: 10px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,.15);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,.4);
+    }
+    .bar {
+      height: 100%; width: 0;
+      background: linear-gradient(90deg, var(--brand) 0%, var(--accent) 100%);
+      transition: width .6s ease-in-out;
+    }
+
+    .links { display: flex; gap: .9rem; flex-wrap: wrap; justify-content: center; }
+
+    .link {
+      padding: .6rem .85rem; border-radius: 999px;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+      color: var(--text); text-decoration: none; font-weight: 600;
+      transition: all .3s ease;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+
+    .link:hover { transform: scale(1.08); filter: brightness(1.2); }
+
+    .link[href*="twitch.tv"]:hover {
+      background: rgba(145,70,255,0.3);
+      box-shadow: 0 0 16px var(--twitch), 0 0 32px rgba(145,70,255,0.4);
+      color: var(--twitch);
+    }
+    .link[href*="youtube.com"]:hover {
+      background: rgba(255,23,68,0.3);
+      box-shadow: 0 0 16px var(--yt), 0 0 32px rgba(255,23,68,0.4);
+      color: var(--yt);
+    }
+    .link[href*="tiktok.com"]:hover {
+      background: rgba(0,242,234,0.3);
+      box-shadow: 0 0 16px var(--tiktok), 0 0 32px rgba(0,242,234,0.4);
+      color: var(--tiktok);
+    }
+
+    .link svg {
+      width: 1em; height: 1em; margin-right: 0.4em;
+      fill: currentColor; transition: transform 0.3s ease;
+    }
+
+    .tiny { font-size: .82rem; color: var(--muted); text-align: center; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .grid-bg, .glow { animation: none; }
+      .bar { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="grid-bg" aria-hidden="true"></div>
+
+    <main class="card" role="main" aria-labelledby="headline">
+      <div class="glow" aria-hidden="true"></div>
+
+      <!-- NAV TABS -->
+<nav class="nav" aria-label="Primary">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="live.html" class="nav-link">Live Streams</a>
+  <a href="merch.html" class="nav-link" aria-current="page">Merch</a>
+</nav>
+
+      <img src="https://i.postimg.cc/VLRLKGcG/1-01.png" alt="Graveyard of Boodinky logo" class="logo-img" loading="lazy" decoding="async" width="320" height="320" />
+
+      <h1 id="headline">We're Coming... Soon</h1>
+      <p class="lead">A Discord's Story</p>
+
+      <section>
+        <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25" aria-label="25 percent complete" data-progress-min="10" data-progress-max="80" data-progress-duration="10000">
+          <div class="bar" id="bar"></div>
+        </div>
+      </section>
+
+      <hr style="margin:1.4rem 0; border:none; border-top:1px solid rgba(255,255,255,.25)">
+
+      <div class="links">
+        <a class="link" href="https://www.twitch.tv/graveyardofboodinky" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2L3 6v15h5v1h3l2-1h4l4-4V2H4zm16 13l-2 2h-5l-2 1H9v-1H6V4h14v11zM14 7h2v5h-2V7zm-4 0h2v5h-2V7z"/></svg>
+          Twitch
+        </a>
+        <a class="link" href="https://www.youtube.com/@graveyardofboodinky" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          YouTube
+        </a>
+        <a class="link" href="https://www.tiktok.com/@boodinkyboys" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.5 2c1.5 0 2.9.3 4.2.9 0 1.5.7 2.9 1.8 3.9 1.1.9 2.5 1.4 3.9 1.4v3.8c-1.7 0-3.3-.5-4.7-1.3v6.7c0 3.5-2.8 6.4-6.3 6.6h-.4c-3.6 0-6.5-2.9-6.5-6.6 0-3.2 2.3-5.9 5.4-6.4v4.1c-.7.4-1.2 1.1-1.2 2 0 1.3 1 2.3 2.2 2.3h.1c1.2 0 2.2-1 2.2-2.3V2h-.7z"/></svg>
+          TikTok
+        </a>
+      </div>
+
+      <div class="tiny" style="margin-top:1rem;">© <span id="year"></span> Graveyard of Boodinky</div>
+    </main>
+  </div>
+
+  <script>
+    // Year stamp
+    (function () {
+      var yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+    }());
+
+    // Oscillating progress (reads speed & range from data-attributes, honors reduced motion)
+    (function () {
+      var bar = document.getElementById('bar');
+      var pb = bar && bar.parentElement;
+      if (!pb) return;
+
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var startVal = Math.max(0, Math.min(100, parseInt(pb.getAttribute('aria-valuenow'), 10) || 0));
+
+      var minVal = Math.max(0, Math.min(100, parseInt(pb.dataset.progressMin, 10) || 10));
+      var maxVal = Math.max(minVal, Math.min(100, parseInt(pb.dataset.progressMax, 10) || 80));
+      var duration = Math.max(1000, parseInt(pb.dataset.progressDuration, 10) || 60000); // ms per full cycle
+
+      function setProgress(p) {
+        var val = Math.max(0, Math.min(100, p));
+        bar.style.width = val + '%';
+        pb.setAttribute('aria-valuenow', Math.round(val));
+        pb.setAttribute('aria-label', Math.round(val) + ' percent complete');
+      }
+
+      if (prefersReduced) { setProgress(startVal); return; }
+
+      var start = performance.now();
+      function tick(now) {
+        var t = ((now - start) % duration) / duration;       // 0..1
+        var wave = 0.5 - 0.5 * Math.cos(t * 2 * Math.PI);    // ease in/out
+        var val = minVal + (maxVal - minVal) * wave;         // map to range
+        setProgress(val);
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }());
+  </script>
+</body>
+</html>
+
 
