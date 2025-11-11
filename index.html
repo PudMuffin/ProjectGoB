@@ -1,17 +1,228 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Website</title>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
-  </head>
-  <body>
-    <main>
-        <h1>Graveyard of Boodinky</h1>  
-    </main>
-	<script src="index.js"></script>
-  </body>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>We're Under Construction</title>
+    <meta name="description" content="A clean, responsive under construction page with vaporwave blue + purple aesthetic and animated grid." />
+    <meta property="og:title" content="We're Under Construction" />
+    <meta property="og:description" content="Something great is on the way. Check back soon." />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#7df9ff" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0720;
+            --text: #eaf6ff;
+            --muted: #b8a2ff;
+            --brand: #00bfff;
+            --brand-2: #7df9ff;
+            --accent: #a78bfa;
+            --grid-line: rgba(167, 139, 250, .22);
+            --grid-glow: rgba(125, 249, 255, .18);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+            color: var(--text);
+            background:
+                radial-gradient(90vw 90vw at 15% -20%, rgba(167, 139, 250, .25), transparent 60%),
+                radial-gradient(70vw 70vw at 120% 0%, rgba(0, 191, 255, .25), transparent 60%),
+                radial-gradient(60vw 60vw at 0% 120%, rgba(125, 249, 255, .2), transparent 60%),
+                var(--bg);
+            background-attachment: fixed;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100%;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .grid-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            opacity: .45;
+            mix-blend-mode: screen;
+            background-image:
+                linear-gradient(to bottom, var(--grid-glow), transparent 60%),
+                repeating-linear-gradient(to right, var(--grid-line) 0 1px, transparent 1px 80px),
+                repeating-linear-gradient(to top, var(--grid-line) 0 1px, transparent 1px 80px);
+            background-size: 100% 100%, 160px 160px, 160px 160px;
+            background-position: 0 0, 0 0, 0 0;
+            transform: perspective(900px) rotateX(60deg) translateY(25%);
+            filter: drop-shadow(0 0 8px var(--grid-glow));
+            animation: gridScroll 18s linear infinite;
+        }
+
+        @keyframes gridScroll {
+            to {
+                background-position: 0 0, 0 320px, 0 -320px;
+            }
+        }
+
+        .card {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 760px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02));
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 24px;
+            padding: clamp(1.5rem, 3vw, 2.5rem);
+            backdrop-filter: blur(8px);
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 191, 255, .35), 0 0 40px rgba(167, 139, 250, .15), inset 0 1px 0 rgba(255, 255, 255, .08);
+            text-align: center;
+        }
+
+        .glow {
+            position: absolute;
+            inset: -40%;
+            background: radial-gradient(closest-side, rgba(167, 139, 250, .2), transparent 70%);
+            filter: blur(70px);
+            pointer-events: none;
+            animation: float 14s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(3rem, -2rem);
+            }
+        }
+
+        .logo-img {
+            width: 160px;
+            max-width: 50%;
+            height: auto;
+            margin-bottom: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(125, 249, 255, .4);
+        }
+
+        h1 {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            line-height: 1.15;
+            margin: .2rem 0 .6rem;
+            color: var(--brand-2);
+            text-shadow: 0 0 12px rgba(125, 249, 255, .5), 0 0 20px rgba(167, 139, 250, .3);
+        }
+
+        p.lead {
+            font-size: clamp(1rem, 2.2vw, 1.1rem);
+            color: var(--muted);
+            margin: 0 0 1.2rem;
+        }
+
+        /* Simplified progress bar */
+        .progress {
+            background: rgba(255, 255, 255, .08);
+            border-radius: 999px;
+            height: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, .15);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, .4);
+        }
+
+        .bar {
+            height: 100%;
+            width: 36%;
+            background: linear-gradient(90deg, var(--brand) 0%, var(--accent) 100%);
+            transition: width .5s ease-in-out;
+        }
+
+        .links {
+            display: flex;
+            gap: .9rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .link {
+            padding: .6rem .85rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .1);
+            border: 1px solid rgba(255, 255, 255, .2);
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: filter .2s ease, transform .1s ease;
+            box-shadow: 0 0 10px rgba(167, 139, 250, .2);
+        }
+
+        .link:hover {
+            filter: brightness(1.2);
+            transform: scale(1.05);
+            box-shadow: 0 0 16px rgba(167, 139, 250, .3), 0 0 24px rgba(125, 249, 255, .3);
+        }
+
+        .tiny {
+            font-size: .82rem;
+            color: var(--muted);
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="grid-bg" aria-hidden="true"></div>
+
+        <main class="card" role="main" aria-labelledby="headline">
+            <div class="glow" aria-hidden="true"></div>
+
+            <img src="1-01.png" alt="Graveyard of Boodinky logo" class="logo-img" />
+
+            <h1 id="headline">We're Coming</h1>
+            <p class="lead">A Discord Story</p>
+
+            <section aria-labelledby="progress-label">
+                <div class="tiny" id="progress-label">R&D</div>
+                <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25" aria-label="25 percent complete">
+                    <div class="bar"></div>
+                </div>
+            </section>
+
+            <hr style="margin:1.4rem 0; border:none; border-top:1px solid rgba(255,255,255,.25)">
+
+            <div class="links">
+                <a class="link" href="#" aria-disabled="true" onclick="return false">Twitch</a>
+                <a class="link" href="#" aria-disabled="true" onclick="return false">Youtube</a>
+                <a class="link" href="#" aria-disabled="true" onclick="return false">TikTok</a>
+            </div>
+
+            <div class="tiny" style="margin-top:1rem;">© <span id="year"></span> Graveyard of Boodinky</div>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+
 </html>
