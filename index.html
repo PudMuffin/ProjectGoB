@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>We're Under Construction</title>
+  <title>Graveyard of Boodinky</title>
   <link rel="icon" type="image/png" href="https://i.postimg.cc/prdZN546/favicon.png" />
   <meta name="description" content="A clean, responsive under construction page with vaporwave blue + purple aesthetic and animated grid." />
   <meta property="og:title" content="We're Under Construction" />
@@ -166,8 +166,8 @@
 
       <img src="https://i.postimg.cc/mr9fKWjv/1-01.png" alt="Graveyard of Boodinky logo" class="logo-img" loading="lazy" decoding="async" width="320" height="320" />
 
-      <h1 id="headline">We're Coming</h1>
-      <p class="lead">A Discord Story</p>
+      <h1 id="headline">We're Coming... Soon</h1>
+      <p class="lead">A Discord's Story</p>
 
       <section>
         <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25" aria-label="25 percent complete">
@@ -209,5 +209,59 @@
       }
     }());
   </script>
+  
+  <script>
+// Year stamp
+document.getElementById('year').textContent = new Date().getFullYear();
+
+
+// Progressive fill that reverses once reaching a limit
+(function () {
+const bar = document.getElementById('bar');
+const pb = bar && bar.parentElement;
+if (!pb) return;
+
+
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let startVal = parseInt(pb.getAttribute('aria-valuenow'), 10);
+if (!isFinite(startVal)) startVal = 0;
+
+
+const minVal = 10; // where to stop on the low end
+const maxVal = 80; // where to stop on the high end
+const duration = 10000; // ms for one full cycle (up + down)
+
+
+function setProgress(p) {
+const val = Math.max(0, Math.min(100, p));
+bar.style.width = val + '%';
+pb.setAttribute('aria-valuenow', Math.round(val));
+pb.setAttribute('aria-label', Math.round(val) + ' percent complete');
+}
+
+
+if (prefersReduced) {
+setProgress(startVal);
+return;
+}
+
+
+let start = performance.now();
+let direction = 1; // 1 = forward, -1 = backward
+let current = startVal;
+
+
+function tick(now) {
+const elapsed = now - start;
+const t = (elapsed % duration) / duration; // loop 0..1
+// create a smooth back-and-forth ramp using sine wave mapping
+const wave = 0.5 - 0.5 * Math.cos(t * 2 * Math.PI);
+current = minVal + (maxVal - minVal) * wave;
+setProgress(current);
+requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+}());
+</script>
 </body>
 </html>
