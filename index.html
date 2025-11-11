@@ -15,6 +15,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <!-- Header/Tab font -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -91,14 +93,45 @@
     }
     @keyframes float { 0%,100% { transform: translate(0,0); } 50% { transform: translate(3rem, -2rem); } }
 
+    /* Orbitron for headings/nav/tagline/footer */
+    h1, h2, h3, .nav-link, .lead, .tiny { font-family: 'Orbitron', sans-serif; }
+
+    /* Top nav */
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .nav-link {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text);
+      text-decoration: none;
+      position: relative;
+      padding: .5em 1em;
+      border-radius: 999px;
+      transition: color .3s ease, box-shadow .3s ease, background .3s ease;
+    }
+    .nav-link:hover {
+      color: var(--brand-2);
+      background: linear-gradient(90deg, var(--brand) 0%, var(--accent) 100%);
+      box-shadow: 0 0 10px var(--brand), 0 0 20px var(--accent), inset 0 0 8px rgba(255,255,255,0.15);
+    }
+
     .logo-img {
       width: 160px; max-width: 50%; height: auto;
       margin-bottom: 1.5rem; border-radius: 12px;
     }
 
     h1 {
-      font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.15;
+      font-weight: 800;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      text-transform: uppercase;
+      letter-spacing: .06em;
       margin: .2rem 0 .6rem; color: var(--brand-2);
+      text-shadow: 0 0 12px rgba(125,249,255,.35), 0 0 24px rgba(167,139,250,.2);
     }
     p.lead { font-size: clamp(1rem, 2.2vw, 1.1rem); color: var(--muted); margin: 0 0 1.2rem; }
 
@@ -161,6 +194,13 @@
 
     <main class="card" role="main" aria-labelledby="headline">
       <div class="glow" aria-hidden="true"></div>
+
+      <!-- NAV TABS -->
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="live.html" class="nav-link">Live Streams</a>
+        <a href="merch.html" class="nav-link">Merch</a>
+      </nav>
 
       <img src="https://i.postimg.cc/VLRLKGcG/1-01.png" alt="Graveyard of Boodinky logo" class="logo-img" loading="lazy" decoding="async" width="320" height="320" />
 
