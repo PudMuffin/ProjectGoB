@@ -48,6 +48,7 @@
 
     .container {
       display: flex;
+      flex-direction: column; /* stack header then card */
       align-items: center;
       justify-content: center;
       min-height: 100%;
@@ -72,6 +73,50 @@
     }
     @keyframes gridScroll { to { background-position: 0 0, 0 320px, 0 -320px; } }
 
+    /* Header block (logo above nav) */
+    .header-block {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2.5rem; /* space above the card */
+    }
+
+    .logo-img {
+      width: 160px; max-width: 50%; height: auto;
+      margin-bottom: 1rem; border-radius: 12px;
+    }
+
+    /* Orbitron font family */
+    h1, h2, h3, .nav-link, .lead, .tiny { font-family: 'Orbitron', sans-serif; }
+
+    /* Nav bar */
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text);
+      text-decoration: none;
+      position: relative;
+      padding: .5em 1em;
+      border-radius: 999px;
+      transition: color .3s ease, box-shadow .3s ease, background .3s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link[aria-current="page"] {
+      color: var(--brand-2);
+      background: linear-gradient(90deg, var(--brand) 0%, var(--accent) 100%);
+      box-shadow: 0 0 10px var(--brand), 0 0 20px var(--accent), inset 0 0 8px rgba(255,255,255,0.15);
+    }
+
     /* Card with balanced purple-blue glow */
     .card {
       position: relative;
@@ -86,12 +131,10 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       overflow: hidden;
-
       box-shadow:
         0 0 26px var(--accent),
         0 0 40px var(--brand),
         inset 0 0 10px rgba(255,255,255,0.08);
-
       animation: borderShift 10s ease-in-out infinite alternate;
     }
 
@@ -136,41 +179,6 @@
       animation: float 14s ease-in-out infinite;
     }
     @keyframes float { 0%,100% { transform: translate(0,0); } 50% { transform: translate(3rem, -2rem); } }
-
-    /* Orbitron font family for major elements */
-    h1, h2, h3, .nav-link, .lead, .tiny { font-family: 'Orbitron', sans-serif; }
-
-    /* Nav bar */
-    .nav {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .nav-link {
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--text);
-      text-decoration: none;
-      position: relative;
-      padding: .5em 1em;
-      border-radius: 999px;
-      transition: color .3s ease, box-shadow .3s ease, background .3s ease;
-    }
-
-    .nav-link:hover,
-    .nav-link[aria-current="page"] {
-      color: var(--brand-2);
-      background: linear-gradient(90deg, var(--brand) 0%, var(--accent) 100%);
-      box-shadow: 0 0 10px var(--brand), 0 0 20px var(--accent), inset 0 0 8px rgba(255,255,255,0.15);
-    }
-
-    .logo-img {
-      width: 160px; max-width: 50%; height: auto;
-      margin-bottom: 1.5rem; border-radius: 12px;
-    }
 
     h1 {
       font-weight: 800;
@@ -244,27 +252,26 @@
     }
 
     .tiny { font-size: .82rem; color: var(--muted); text-align: center; }
-
-    @media (prefers-reduced-motion: reduce) {
-      .grid-bg, .glow { animation: none; }
-      .bar { transition: none; }
-    }
+    @media (prefers-reduced-motion: reduce) { .grid-bg, .glow { animation: none; } .bar { transition: none; } }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="grid-bg" aria-hidden="true"></div>
 
-    <main class="card" role="main" aria-labelledby="headline">
-      <div class="glow" aria-hidden="true"></div>
+    <!-- Header area: LOGO ABOVE NAV and OUTSIDE the card -->
+    <div class="header-block">
+      <img src="https://i.postimg.cc/VLRLKGcG/1-01.png" alt="Graveyard of Boodinky logo" class="logo-img" loading="lazy" decoding="async" width="320" height="320" />
 
       <nav class="nav" aria-label="Primary">
         <a href="index.html" class="nav-link" aria-current="page">Home</a>
         <a href="live.html" class="nav-link">Live</a>
         <a href="merch.html" class="nav-link">Merch</a>
       </nav>
+    </div>
 
-      <img src="https://i.postimg.cc/VLRLKGcG/1-01.png" alt="Graveyard of Boodinky logo" class="logo-img" loading="lazy" decoding="async" width="320" height="320" />
+    <main class="card" role="main" aria-labelledby="headline">
+      <div class="glow" aria-hidden="true"></div>
 
       <h1 id="headline">We're Coming... Soon</h1>
       <p class="lead">A Discord's Story</p>

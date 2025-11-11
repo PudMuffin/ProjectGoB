@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Graveyard of Boodinky</title>
+  <title>Graveyard of Boodinky — Merch</title>
   <link rel="icon" type="image/png" href="https://i.postimg.cc/YS86kfg1/favicon.png" />
   <meta name="description" content="A clean, responsive under construction page with vaporwave blue + purple aesthetic and animated grid." />
   <meta property="og:title" content="The Graveyard of Boodinky" />
@@ -48,15 +48,16 @@
 
     .container {
       display: flex;
+      flex-direction: column;           /* stack header above card */
       align-items: center;
       justify-content: center;
+      gap: clamp(1rem, 3vw, 2rem);      /* space between header and card */
       min-height: 100%;
       padding: 2rem;
       position: relative;
       overflow: hidden;
     }
 
-    /* Animated 80s grid */
     .grid-bg {
       position: absolute; inset: 0; z-index: 0; pointer-events: none;
       opacity: .45; mix-blend-mode: screen;
@@ -72,7 +73,53 @@
     }
     @keyframes gridScroll { to { background-position: 0 0, 0 320px, 0 -320px; } }
 
-    /* Card with balanced purple-blue glow */
+    /* ====== Header (logo + nav) ====== */
+    .site-header {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(.75rem, 2vw, 1rem);
+      text-align: center;
+    }
+
+    .logo-img {
+      width: 160px; max-width: 50%; height: auto;
+      border-radius: 12px;
+      /* optional subtle glow for logo */
+      box-shadow: 0 0 0 transparent;
+    }
+
+    /* Orbitron for headings/nav/tagline/footer */
+    h1, h2, h3, .nav-link, .lead, .tiny { font-family: 'Orbitron', sans-serif; }
+
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text);
+      text-decoration: none;
+      position: relative;
+      padding: .5em 1em;
+      border-radius: 999px;
+      transition: color .3s ease, box-shadow .3s ease, background .3s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link[aria-current="page"] {
+      color: var(--brand-2);
+      background: linear-gradient(90deg, var(--brand) 0%, var(--accent) 100%);
+      box-shadow: 0 0 10px var(--brand), 0 0 20px var(--accent), inset 0 0 8px rgba(255,255,255,0.15);
+    }
+
+    /* ====== Card ====== */
     .card {
       position: relative;
       z-index: 1;
@@ -116,7 +163,6 @@
       }
     }
 
-    /* soft purple haze inside the card */
     .card::before {
       content: "";
       position: absolute;
@@ -128,7 +174,6 @@
         radial-gradient(90% 120% at 0% 100%, rgba(0,191,255,0.06), transparent 60%);
     }
 
-    /* Floating ambient glow */
     .glow {
       position: absolute; inset: -40%;
       background: radial-gradient(closest-side, rgba(167,139,250,.2), transparent 70%);
@@ -136,41 +181,6 @@
       animation: float 14s ease-in-out infinite;
     }
     @keyframes float { 0%,100% { transform: translate(0,0); } 50% { transform: translate(3rem, -2rem); } }
-
-    /* Orbitron font family for major elements */
-    h1, h2, h3, .nav-link, .lead, .tiny { font-family: 'Orbitron', sans-serif; }
-
-    /* Nav bar */
-    .nav {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .nav-link {
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--text);
-      text-decoration: none;
-      position: relative;
-      padding: .5em 1em;
-      border-radius: 999px;
-      transition: color .3s ease, box-shadow .3s ease, background .3s ease;
-    }
-
-    .nav-link:hover,
-    .nav-link[aria-current="page"] {
-      color: var(--brand-2);
-      background: linear-gradient(90deg, var(--brand) 0%, var(--accent) 100%);
-      box-shadow: 0 0 10px var(--brand), 0 0 20px var(--accent), inset 0 0 8px rgba(255,255,255,0.15);
-    }
-
-    .logo-img {
-      width: 160px; max-width: 50%; height: auto;
-      margin-bottom: 1.5rem; border-radius: 12px;
-    }
 
     h1 {
       font-weight: 800;
@@ -187,7 +197,6 @@
       margin: 0 0 1.2rem;
     }
 
-    /* Progress bar */
     .progress {
       background: rgba(255,255,255,.08);
       border-radius: 999px;
@@ -255,16 +264,26 @@
   <div class="container">
     <div class="grid-bg" aria-hidden="true"></div>
 
-    <main class="card" role="main" aria-labelledby="headline">
-      <div class="glow" aria-hidden="true"></div>
+    <!-- Header OUTSIDE the card -->
+    <header class="site-header">
+      <img src="https://i.postimg.cc/VLRLKGcG/1-01.png"
+           alt="Graveyard of Boodinky logo"
+           class="logo-img"
+           loading="lazy"
+           decoding="async"
+           width="320"
+           height="320" />
 
       <nav class="nav" aria-label="Primary">
         <a href="index.html" class="nav-link">Home</a>
         <a href="live.html" class="nav-link">Live</a>
-        <a href="merch.html" class="nav-link"aria-current="page">Merch</a>
+        <a href="merch.html" class="nav-link" aria-current="page">Merch</a>
       </nav>
+    </header>
 
-      <img src="https://i.postimg.cc/VLRLKGcG/1-01.png" alt="Graveyard of Boodinky logo" class="logo-img" loading="lazy" decoding="async" width="320" height="320" />
+    <!-- Card content -->
+    <main class="card" role="main" aria-labelledby="headline">
+      <div class="glow" aria-hidden="true"></div>
 
       <h1 id="headline">We're Coming... Soon</h1>
       <p class="lead">A Discord's Story</p>

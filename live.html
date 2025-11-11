@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Graveyard of Boodinky</title>
+  <title>Graveyard of Boodinky — Live</title>
   <link rel="icon" type="image/png" href="https://i.postimg.cc/YS86kfg1/favicon.png" />
-  <meta name="description" content="A clean, responsive under construction page with vaporwave blue + purple aesthetic and animated grid." />
+  <meta name="description" content="Watch Graveyard of Boodinky live on Twitch and YouTube." />
   <meta property="og:title" content="The Graveyard of Boodinky" />
   <meta property="og:description" content="Tall Tales From a Small Discord" />
   <meta property="og:type" content="website" />
@@ -22,20 +22,19 @@
       --bg: #0a0720;
       --text: #eaf6ff;
       --muted: #eaf6ff;
-      --brand: #00bfff;      /* bright cyan-blue */
+      --brand: #00bfff;
       --brand-2: #eaf6ff;
-      --accent: #b26cff;     /* violet-purple */
+      --accent: #b26cff;
       --grid-line: rgba(167,139,250,.22);
-      --grid-glow: rgba(178,108,255,.18); /* shifted toward purple */
+      --grid-glow: rgba(178,108,255,.18);
       --yt: #ff1744;
       --twitch: #9146ff;
       --tiktok: #00f2ea;
     }
 
     * { box-sizing: border-box; }
-    html, body { height: 100%; }
+    html, body { height: 100%; margin: 0; }
     body {
-      margin: 0;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       color: var(--text);
       background:
@@ -48,15 +47,16 @@
 
     .container {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100%;
       padding: 2rem;
       position: relative;
       overflow: hidden;
+      gap: 0.75rem;
     }
 
-    /* Animated 80s grid */
     .grid-bg {
       position: absolute; inset: 0; z-index: 0; pointer-events: none;
       opacity: .45; mix-blend-mode: screen;
@@ -65,90 +65,38 @@
         repeating-linear-gradient(to right, var(--grid-line) 0 1px, transparent 1px 80px),
         repeating-linear-gradient(to top, var(--grid-line) 0 1px, transparent 1px 80px);
       background-size: 100% 100%, 160px 160px, 160px 160px;
-      background-position: 0 0, 0 0, 0 0;
       transform: perspective(900px) rotateX(60deg) translateY(25%);
       filter: drop-shadow(0 0 8px var(--grid-glow));
       animation: gridScroll 18s linear infinite;
     }
     @keyframes gridScroll { to { background-position: 0 0, 0 320px, 0 -320px; } }
 
-    /* Card with balanced purple-blue glow */
-    .card {
+    /* HEADER BLOCK */
+    .header-block {
       position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 1200px; /* wider on live page for side-by-side players */
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 24px;
-      padding: clamp(1.5rem, 3vw, 2.5rem);
-      text-align: center;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      overflow: hidden;
-
-      box-shadow:
-        0 0 26px var(--accent),
-        0 0 40px var(--brand),
-        inset 0 0 10px rgba(255,255,255,0.08);
-
-      animation: borderShift 10s ease-in-out infinite alternate;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2.5rem;
     }
 
-    @keyframes borderShift {
-      0% {
-        box-shadow:
-          0 0 26px var(--accent),
-          0 0 40px var(--brand),
-          inset 0 0 10px rgba(255,255,255,0.08);
-      }
-      50% {
-        box-shadow:
-          0 0 34px var(--accent),
-          0 0 48px var(--brand),
-          inset 0 0 10px rgba(255,255,255,0.08);
-      }
-      100% {
-        box-shadow:
-          0 0 26px var(--accent),
-          0 0 40px var(--brand),
-          inset 0 0 10px rgba(255,255,255,0.08);
-      }
+    .logo-img {
+      width: 160px;
+      max-width: 50%;
+      height: auto;
+      margin-bottom: 1rem;
+      border-radius: 12px;
     }
 
-    /* soft purple haze inside the card */
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      pointer-events: none;
-      background:
-        radial-gradient(80% 100% at 70% 0%, rgba(178,108,255,0.08), transparent 60%),
-        radial-gradient(90% 120% at 0% 100%, rgba(0,191,255,0.06), transparent 60%);
-    }
-
-    /* Floating ambient glow */
-    .glow {
-      position: absolute; inset: -40%;
-      background: radial-gradient(closest-side, rgba(167,139,250,.2), transparent 70%);
-      filter: blur(70px); pointer-events: none;
-      animation: float 14s ease-in-out infinite;
-    }
-    @keyframes float { 0%,100% { transform: translate(0,0); } 50% { transform: translate(3rem, -2rem); } }
-
-    /* Orbitron font family for major elements */
-    h1, h2, h3, .nav-link, .lead, .tiny { font-family: 'Orbitron', sans-serif; }
-
-    /* Nav bar */
     .nav {
       display: flex;
       justify-content: center;
       gap: 1.5rem;
-      margin-bottom: 1.25rem;
     }
 
     .nav-link {
+      font-family: 'Orbitron', sans-serif;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: .08em;
@@ -167,30 +115,70 @@
       box-shadow: 0 0 10px var(--brand), 0 0 20px var(--accent), inset 0 0 8px rgba(255,255,255,0.15);
     }
 
-    .logo-img {
-      width: 160px; max-width: 50%; height: auto;
-      margin-bottom: 1.5rem; border-radius: 12px;
+    /* CARD */
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1200px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+      text-align: center;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      overflow: hidden;
+      box-shadow: 0 0 26px var(--accent), 0 0 40px var(--brand), inset 0 0 10px rgba(255,255,255,0.08);
+      animation: borderShift 10s ease-in-out infinite alternate;
+    }
+    @keyframes borderShift {
+      0%,100% { box-shadow: 0 0 26px var(--accent), 0 0 40px var(--brand), inset 0 0 10px rgba(255,255,255,0.08); }
+      50% { box-shadow: 0 0 34px var(--accent), 0 0 48px var(--brand), inset 0 0 10px rgba(255,255,255,0.08); }
     }
 
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background:
+        radial-gradient(80% 100% at 70% 0%, rgba(178,108,255,0.08), transparent 60%),
+        radial-gradient(90% 120% at 0% 100%, rgba(0,191,255,0.06), transparent 60%);
+    }
+
+    h1, p.lead, .tiny { font-family: 'Orbitron', sans-serif; }
     h1 {
       font-weight: 800;
       font-size: clamp(2rem, 4.5vw, 3rem);
       text-transform: uppercase;
       letter-spacing: .06em;
-      margin: .2rem 0 .6rem; color: var(--brand-2);
+      margin: .2rem 0 .6rem;
+      color: var(--brand-2);
       text-shadow: 0 0 12px rgba(125,249,255,.35), 0 0 24px rgba(167,139,250,.2);
     }
+    p.lead { font-size: clamp(1rem, 2.2vw, 1.1rem); color: var(--muted); margin: 0 0 1.2rem; }
 
-    p.lead {
-      font-size: clamp(1rem, 2.2vw, 1.1rem);
-      color: var(--muted);
-      margin: 0 0 1.2rem;
+    /* EMBEDS */
+    .embed-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    @media (min-width: 900px) { .embed-grid { grid-template-columns: 1fr 1fr; } }
+
+    .embed { position: relative; width: 100%; }
+    .embed::before { content: ""; display: block; padding-top: 56.25%; }
+    .embed > iframe {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      border: 0; border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.4);
     }
 
-    /* Progress bar (not used here, but harmless) */
-    .progress { background: rgba(255,255,255,.08); border-radius: 999px; height: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,.15); box-shadow: inset 0 2px 4px rgba(0,0,0,.4); }
-    .bar { height: 100%; width: 0; background: linear-gradient(90deg, var(--brand) 0%, var(--accent) 100%); transition: width .6s ease-in-out; }
-
+    /* LINKS */
     .links { display: flex; gap: .9rem; flex-wrap: wrap; justify-content: center; }
     .link { padding: .6rem .85rem; border-radius: 999px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); color: var(--text); text-decoration: none; font-weight: 600; transition: all .3s ease; display: inline-flex; align-items: center; justify-content: center; }
     .link:hover { transform: scale(1.08); filter: brightness(1.2); }
@@ -198,118 +186,62 @@
     .link[href*="youtube.com"]:hover { background: rgba(255,23,68,0.3); box-shadow: 0 0 16px var(--yt), 0 0 32px rgba(255,23,68,0.4); color: var(--yt); }
     .link[href*="tiktok.com"]:hover { background: rgba(0,242,234,0.3); box-shadow: 0 0 16px var(--tiktok), 0 0 32px rgba(0,242,234,0.4); color: var(--tiktok); }
 
-    .tiny { font-size: .82rem; color: var(--muted); text-align: center; }
-
-    @media (prefers-reduced-motion: reduce) {
-      .grid-bg, .glow { animation: none; }
-      .bar { transition: none; }
-    }
-
-    /* 2-up responsive embeds */
-    .embed-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    @media (min-width: 900px) {
-      .embed-grid { grid-template-columns: 1fr 1fr; }
-    }
-    .embed { position: relative; width: 100%; }
-    .embed::before { content: ""; display: block; padding-top: 56.25%; } /* 16:9 */
-    .embed > iframe {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      border: 0; border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.4);
-    }
+    .tiny { font-size: .82rem; color: var(--muted); text-align: center; margin-top: 1rem; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="grid-bg" aria-hidden="true"></div>
 
-    <main class="card" role="main" aria-labelledby="headline">
-      <div class="glow" aria-hidden="true"></div>
+    <!-- Header area: LOGO ABOVE NAV -->
+    <div class="header-block">
+      <img src="https://i.postimg.cc/VLRLKGcG/1-01.png" alt="Graveyard of Boodinky logo" class="logo-img" loading="lazy" decoding="async" width="320" height="320" />
 
       <nav class="nav" aria-label="Primary">
         <a href="index.html" class="nav-link">Home</a>
         <a href="live.html" class="nav-link" aria-current="page">Live</a>
         <a href="merch.html" class="nav-link">Merch</a>
       </nav>
+    </div>
 
-      <img src="https://i.postimg.cc/VLRLKGcG/1-01.png" alt="Graveyard of Boodinky logo" class="logo-img" loading="lazy" decoding="async" width="320" height="320" />
+    <main class="card" role="main" aria-labelledby="headline">
+      <h1 id="headline">Live Streams</h1>
+      <p class="lead">Watch us on Twitch & YouTube</p>
 
       <section class="embed-grid" aria-label="Live Players">
-       <!-- Twitch -->
-<div class="embed">
-  <iframe
-    src="https://player.twitch.tv/?channel=graveyardofboodinky&parent=pudmuffin.github.io&parent=boodinky.org&parent=www.boodinky.org&muted=true&autoplay=true"
-    allowfullscreen
-    allow="autoplay; picture-in-picture"
-    referrerpolicy="origin"
-    loading="lazy"
-    title="Twitch Live Player">
-  </iframe>
-</div>
-        <!-- YouTube (live channel) -->
+        <div class="embed">
+          <iframe
+            src="https://player.twitch.tv/?channel=graveyardofboodinky&parent=pudmuffin.github.io&parent=boodinky.org&parent=www.boodinky.org&muted=true&autoplay=true"
+            allowfullscreen
+            allow="autoplay; picture-in-picture"
+            referrerpolicy="origin"
+            loading="lazy"
+            title="Twitch Live Player"></iframe>
+        </div>
+
         <div class="embed">
           <iframe
             src="https://www.youtube.com/embed/live_stream?channel=UC3ob7y2Pc--sHbAkxjCV81g&autoplay=1&mute=1&modestbranding=1&rel=0&playsinline=1"
             allow="autoplay; encrypted-media; picture-in-picture; web-share"
             allowfullscreen
             loading="lazy"
-            title="YouTube Live Player">
-          </iframe>
+            title="YouTube Live Player"></iframe>
         </div>
       </section>
-
-      <br><br>
-
+<br>
       <div class="links">
         <a class="link" href="https://www.twitch.tv/graveyardofboodinky" target="_blank" rel="noopener noreferrer">Twitch</a>
         <a class="link" href="https://www.youtube.com/@graveyardofboodinky" target="_blank" rel="noopener noreferrer">YouTube</a>
         <a class="link" href="https://www.tiktok.com/@boodinkyboys" target="_blank" rel="noopener noreferrer">TikTok</a>
       </div>
 
-      <div class="tiny" style="margin-top:1rem;">© <span id="year"></span> Graveyard of Boodinky</div>
+      
     </main>
+<div class="tiny">© <span id="year"></span> Graveyard of Boodinky</div>
   </div>
 
   <script>
-    // Year stamp
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // (Progress bar script present in other pages; safe no-op here)
-    (function () {
-      var bar = document.getElementById('bar');
-      var pb = bar && bar.parentElement;
-      if (!pb) return;
-      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var startVal = parseInt(pb.getAttribute('aria-valuenow'), 10) || 0;
-      var minVal = parseInt(pb.dataset.progressMin, 10) || 10;
-      var maxVal = parseInt(pb.dataset.progressMax, 10) || 80;
-      var duration = parseInt(pb.dataset.progressDuration, 10) || 10000;
-
-      function setProgress(p) {
-        var val = Math.max(0, Math.min(100, p));
-        bar.style.width = val + '%';
-        pb.setAttribute('aria-valuenow', Math.round(val));
-        pb.setAttribute('aria-label', Math.round(val) + ' percent complete');
-      }
-
-      if (prefersReduced) { setProgress(startVal); return; }
-
-      var start = performance.now();
-      function tick(now) {
-        var t = ((now - start) % duration) / duration;
-        var wave = 0.5 - 0.5 * Math.cos(t * 2 * Math.PI);
-        var val = minVal + (maxVal - minVal) * wave;
-        setProgress(val);
-        requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    }());
   </script>
 </body>
 </html>
