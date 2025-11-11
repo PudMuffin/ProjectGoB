@@ -1,1 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Merch • Graveyard of Boodinky</title>
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/YS86kfg1/favicon.png" />
+  <meta name="description" content="Grab official Graveyard of Boodinky merch. Shirts, stickers, and more." />
+  <meta property="og:title" content="Merch • Graveyard of Boodinky" />
+  <meta property="og:description" content="Support the chaos. Cop the drip." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#7df9ff" />
+  <meta name="color-scheme" content="dark light" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0a0720; --text: #eaf6ff; --muted: #eaf6ff; --brand: #00bfff; --brand-2: #eaf6ff; --accent: #a78bfa;
+      --grid-line: rgba(167,139,250,.22); --grid-glow: rgba(125,249,255,.18);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; color: var(--text);
+      background: radial-gradient(90vw 90vw at 15% -20%, rgba(167,139,250,.25), transparent 60%), radial-gradient(70vw 70vw at 120% 0%, rgba(0,191,255,.25), transparent 60%), radial-gradient(60vw 60vw at 0% 120%, rgba(125,249,255,.2), transparent 60%), var(--bg); background-attachment: fixed; }
+
+    .container { display: flex; align-items: center; justify-content: center; min-height: 100%; padding: 2rem; position: relative; overflow: hidden; }
+
+    .grid-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: .45; mix-blend-mode: screen;
+      background-image: linear-gradient(to bottom, var(--grid-glow), transparent 60%), repeating-linear-gradient(to right, var(--grid-line) 0 1px, transparent 1px 80px), repeating-linear-gradient(to top, var(--grid-line) 0 1px, transparent 1px 80px);
+      background-size: 100% 100%, 160px 160px, 160px 160px; background-position: 0 0, 0 0, 0 0; transform: perspective(900px) rotateX(60deg) translateY(25%);
+      filter: drop-shadow(0 0 8px var(--grid-glow)); animation: gridScroll 18s linear infinite; }
+    @keyframes gridScroll { to { background-position: 0 0, 0 320px, 0 -320px; } }
+
+    .card { position: relative; z-index: 1; width: 100%; max-width: 1000px; background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.1); border-radius: 24px; padding: clamp(1.5rem, 3vw, 2.5rem); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); overflow: hidden; box-shadow: 0 10px 40px #eaf6ff, 0 0 40px #eaf6ff, inset 0 1px 0 rgba(255,255,255,.08); text-align: center; }
+
+    .glow { position: absolute; inset: -40%; background: radial-gradient(closest-side, rgba(167,139,250,.2), transparent 70%); filter: blur(70px); pointer-events: none; animation: float 14s ease-in-out infinite; }
+    @keyframes float { 0%,100% { transform: translate(0,0); } 50% { transform: translate(3rem, -2rem); } }
+
+    /* Orbitron headings/nav */
+    h1, h2, h3, .nav-link, .tiny { font-family: 'Orbitron', sans-serif; }
+
+    .nav { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.25rem; }
+    .nav-link { font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--text); text-decoration: none; position: relative; padding: .5em 1em; border-radius: 999px; transition: color .3s ease, box-shadow .3s ease, background .3s ease; }
+    .nav-link:hover { color: var(--brand-2); background: linear-gradient(90deg, var(--brand) 0%, var(--accent) 100%); box-shadow: 0 0 10px var(--brand), 0 0 20px var(--accent), inset 0 0 8px rgba(255,255,255,0.15); }
+
+    h1 { font-weight: 800; font-size: clamp(2rem, 4.5vw, 3rem); text-transform: uppercase; letter-spacing: .06em; margin: .2rem 0 1rem; color: var(--brand-2); }
+
+    /* Merch grid */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .item { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 18px; padding: 1rem; text-align: left; transition: transform .2s ease, box-shadow .3s ease, background .3s ease; }
+    .item:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,191,255,.25), 0 0 30px rgba(167,139,250,.2); background: rgba(255,255,255,.08); }
+    .thumb { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 12px; background: #0d0a2a; display: block; }
+    .item h3 { margin: .6rem 0 .25rem; font-size: 1.05rem; }
+    .price { color: var(--brand-2); font-family: 'Orbitron', sans-serif; font-weight: 600; }
+    .cta { display: inline-block; margin-top: .5rem; padding: .5rem .8rem; border-radius: 999px; background: linear-gradient(90deg, var(--brand), var(--accent)); color: #0a0720; text-decoration: none; font-weight: 700; letter-spacing: .04em; }
+
+    .tiny { font-size: .82rem; color: var(--muted); text-align: center; }
+
+    @media (prefers-reduced-motion: reduce) { .grid-bg, .glow { animation: none; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="grid-bg" aria-hidden="true"></div>
+
+    <main class="card" role="main" aria-labelledby="headline">
+      <div class="glow" aria-hidden="true"></div>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="live.html" class="nav-link">Live Streams</a>
+        <a href="merch.html" class="nav-link" aria-current="page">Merch</a>
+      </nav>
+
+      <h1 id="headline">Merch</h1>
+
+      <section class="grid" aria-label="Products">
+        <!-- Replace # with your store URLs and the placeholder images with real ones -->
+        <a class="item" href="#" target="_blank" rel="noopener">
+          <img class="thumb" src="https://picsum.photos/seed/boodinky1/600" alt="T-Shirt mockup" />
+          <h3>Logo Tee</h3>
+          <div class="price">$24</div>
+          <span class="cta">Buy</span>
+        </a>
+        <a class="item" href="#" target="_blank" rel="noopener">
+          <img class="thumb" src="https://picsum.photos/seed/boodinky2/600" alt="Sticker pack mockup" />
+          <h3>Sticker Pack</h3>
+          <div class="price">$8</div>
+          <span class="cta">Buy</span>
+        </a>
+        <a class="item" href="#" target="_blank" rel="noopener">
+          <img class="thumb" src="https://picsum.photos/seed/boodinky3/600" alt="Hoodie mockup" />
+          <h3>Hoodie</h3>
+          <div class="price">$42</div>
+          <span class="cta">Buy</span>
+        </a>
+      </section>
+
+      <div class="tiny" style="margin-top:1rem;">© <span id="year"></span> Graveyard of Boodinky</div>
+    </main>
+  </div>
+
+  <script>
+    (function () { var y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear(); }());
+  </script>
+</body>
+</html>
 
